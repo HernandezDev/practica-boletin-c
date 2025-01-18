@@ -14,6 +14,7 @@ void IngresarNotas(int notas[][MAX_MATERIAS], char materias[][MAX_NOMBRE], int N
 int BuscarAlumno(char alumnos[][MAX_NOMBRE]);
 void CopiarNotas(int notas[][MAX_MATERIAS], int PosOutput, int PosInput);
 void InicializarNotas(int notas[][MAX_MATERIAS], int posicion);
+void OrdenarAlumnos(int notas[][MAX_MATERIAS], float promedios[], char alumnos[][MAX_NOMBRE], int NumAlumno);
 
 // Funciones del menú
 void RegistrarNotas(int notas[][MAX_MATERIAS], float promedios[], char alumnos[][MAX_NOMBRE], char materias[][MAX_NOMBRE], int *NumAlumno);
@@ -162,6 +163,47 @@ void InicializarNotas(int notas[][MAX_MATERIAS], int posicion)
     for (j = 0; j < MAX_MATERIAS; j++)
     {
         notas[posicion][j] = 0;
+    }
+}
+
+void OrdenarAlumnos(int notas[][MAX_MATERIAS], float promedios[], char alumnos[][MAX_NOMBRE], int NumAlumno)
+{
+    // ordenar los alumnos alfabeticamente
+    bool ordenado = false;
+    int i, j;
+    char AuxNombre[MAX_NOMBRE];
+    int AuxNotas[MAX_MATERIAS];
+    while (!ordenado)
+    {
+        ordenado = true;
+        for (i = 0; i < NumAlumno - 1; i++)
+        {
+            if (strcasecmp(alumnos[i], alumnos[i + 1]) > 0)
+            {
+                // Intercambiar nombres
+                strcpy(AuxNombre, alumnos[i]);
+                strcpy(alumnos[i], alumnos[i + 1]);
+                strcpy(alumnos[i + 1], AuxNombre);
+
+                // Copiar notas auxiliares
+                for (j = 0; j < MAX_MATERIAS; j++)
+                {
+                    AuxNotas[j] = notas[i][j];
+                }
+                CopiarNotas(notas, i, i + 1);
+                for (j = 0; j < MAX_MATERIAS; j++)
+                {
+                    notas[i + 1][j] = AuxNotas[j];
+                }
+
+                // Recalcular promedios
+                CalcularPromedio(notas, promedios, i);
+                CalcularPromedio(notas, promedios, i + 1);
+
+                ordenado = false;
+            }
+        }
+        NumAlumno--;
     }
 }
 
@@ -314,6 +356,7 @@ void Guardar(int notas[][MAX_MATERIAS], float promedios[], char alumnos[][MAX_NO
     FILE *archivo;
     int i ,j;
     archivo=fopen("notas.csv","w");
+    OrdenarAlumnos(notas, promedios, alumnos, NumAlumno);
     if (archivo == NULL)
     {
         printf("No se pudo abrir el archivo para escritura.\n");
