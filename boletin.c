@@ -8,7 +8,7 @@
 #define MAX_NOMBRE 50
 
 // Funciones de la lógica
-bool ComprobarNombre(char alumnos[][MAX_NOMBRE], const char nombre[], int NumAlumno);
+bool ComprobarNombre(char alumnos[][MAX_NOMBRE], char nombre[], int NumAlumno);
 void CalcularPromedio(int notas[][MAX_MATERIAS], float promedios[], int NumAlumno);
 void IngresarNotas(int notas[][MAX_MATERIAS], char materias[][MAX_NOMBRE], int NumAlumno);
 int BuscarAlumno(char alumnos[][MAX_NOMBRE]);
@@ -94,7 +94,7 @@ int main()
 
 // Función para comprobar que un nombre no exista en el arreglo de alumnos,
 // excluyendo la posición donde se va a escribir el nuevo nombre.
-bool ComprobarNombre(char alumnos[][MAX_NOMBRE], const char nombre[], int NumAlumno)
+bool ComprobarNombre(char alumnos[][MAX_NOMBRE], char nombre[], int NumAlumno)
 {
     // Comprueba si el nombre no fue ingresado antes
     int i;
@@ -185,7 +185,7 @@ void OrdenarAlumnos(int notas[][MAX_MATERIAS], float promedios[], char alumnos[]
                 strcpy(alumnos[i], alumnos[i + 1]);
                 strcpy(alumnos[i + 1], AuxNombre);
 
-                // Copiar notas auxiliares
+                // Intercambiar notas
                 for (j = 0; j < MAX_MATERIAS; j++)
                 {
                     AuxNotas[j] = notas[i][j];
