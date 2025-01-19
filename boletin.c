@@ -173,6 +173,7 @@ void OrdenarAlumnos(int notas[][MAX_MATERIAS], float promedios[], char alumnos[]
     int i, j;
     char AuxNombre[MAX_NOMBRE];
     int AuxNotas[MAX_MATERIAS];
+    float AuxPromedio;
     while (!ordenado)
     {
         ordenado = true;
@@ -196,9 +197,10 @@ void OrdenarAlumnos(int notas[][MAX_MATERIAS], float promedios[], char alumnos[]
                     notas[i + 1][j] = AuxNotas[j];
                 }
 
-                // Recalcular promedios
-                CalcularPromedio(notas, promedios, i);
-                CalcularPromedio(notas, promedios, i + 1);
+                // Intercambiar promedios
+                AuxPromedio = promedios[i];
+                promedios[i] = promedios[i + 1];
+                promedios[i + 1] = AuxPromedio;
 
                 ordenado = false;
             }
