@@ -8,6 +8,7 @@ Este proyecto es un programa en C para gestionar las notas de los alumnos en var
 - Calcular y mostrar el promedio de notas de cada alumno.
 - Editar las notas y los nombres de los alumnos.
 - Eliminar alumnos del registro.
+- Ordenar los alumnos alfabéticamente.
 - Guardar los datos en un archivo CSV.
 
 ## Requisitos
