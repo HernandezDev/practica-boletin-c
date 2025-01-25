@@ -17,23 +17,6 @@ Este proyecto es un programa en C para gestionar las notas de los alumnos en var
 
 ## Uso
 
-### En Linux/macOS
-1. Clona el repositorio:
-    ```bash
-    git clone https://github.com/HernandezDev/practica-boletin-c.git
-    cd practica-boletin-c
-    ```
-
-2. Compila el programa:
-    ```bash
-    gcc -o boletin boletin.c
-    ```
-
-3. Ejecuta el programa:
-    ```bash
-    ./boletin
-    ```
-
 ### En Windows
 1. Clona el repositorio:
     ```bash
@@ -43,10 +26,10 @@ Este proyecto es un programa en C para gestionar las notas de los alumnos en var
 
 2. Compila el programa (usando Mingw-w64):
     ```bash
-    gcc -o boletin.exe boletin.c
+    gcc main.c gestion.c -o boletin.exe  
     ```
 
 3. Ejecuta el programa:
     ```bash
-    .\boletin.exe
+    ./boletin.exe
     ```
