@@ -12,7 +12,7 @@ bool ComprobarNombre(char alumnos[][MAX_NOMBRE], char nombre[], int NumAlumno);
 void CalcularPromedio(int notas[][MAX_MATERIAS], float promedios[], int NumAlumno);
 void IngresarNotas(int notas[][MAX_MATERIAS], char materias[][MAX_NOMBRE], int NumAlumno);
 int BuscarAlumno(char alumnos[][MAX_NOMBRE]);
-void CopiarNotas(int notas[][MAX_MATERIAS], int PosOutput, int PosInput);
+void CopiarNotas(int notas[][MAX_MATERIAS], int PosOutput[], int PosInput[]);
 void InicializarNotas(int notas[][MAX_MATERIAS], int posicion);
 void OrdenarAlumnos(int notas[][MAX_MATERIAS], float promedios[], char alumnos[][MAX_NOMBRE], int NumAlumno);
 
@@ -146,13 +146,13 @@ int BuscarAlumno(char alumnos[][MAX_NOMBRE])
     return -1;
 }
 
-void CopiarNotas(int notas[][MAX_MATERIAS], int PosOutput, int PosInput)
+void CopiarNotas(int notas[][MAX_MATERIAS], int PosOutput[], int PosInput[])
 {
     // Copiar las notas de un alumno a otro
     int j;
     for (j = 0; j < MAX_MATERIAS; j++)
     {
-        notas[PosOutput][j] = notas[PosInput][j];
+        PosOutput[j] = PosInput[j];
     }
 }
 
@@ -187,15 +187,9 @@ void OrdenarAlumnos(int notas[][MAX_MATERIAS], float promedios[], char alumnos[]
                 strcpy(alumnos[i + 1], AuxNombre);
 
                 // Intercambiar notas
-                for (j = 0; j < MAX_MATERIAS; j++)
-                {
-                    AuxNotas[j] = notas[i][j];
-                }
-                CopiarNotas(notas, i, i + 1);
-                for (j = 0; j < MAX_MATERIAS; j++)
-                {
-                    notas[i + 1][j] = AuxNotas[j];
-                }
+                CopiarNotas(notas, AuxNotas, notas[i]);
+                CopiarNotas(notas, notas[i], notas[i + 1]);
+                CopiarNotas(notas, notas[i + 1], AuxNotas);
 
                 // Intercambiar promedios
                 AuxPromedio = promedios[i];
@@ -339,7 +333,7 @@ void EliminarAlumno(int notas[][MAX_MATERIAS], float promedios[], char alumnos[]
     
     for ( i = posicion; i < MAX_ALUMNOS; i++)
     {
-        CopiarNotas(notas, i, i+1);
+        CopiarNotas(notas, notas[i], notas[i+1]);
         strcpy(alumnos[i], alumnos[i+1]);
         promedios[i]=promedios[i+1];
     }
