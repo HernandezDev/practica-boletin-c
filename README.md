@@ -15,10 +15,9 @@ Este proyecto es un programa en C para gestionar las notas de los alumnos en var
 
 - Compilador de C (como GCC)
 
-## Uso
+## Uso en Windows
 
-### En Windows
-#### Forma Rapida
+### Forma Rapida
 1. Clona el repositorio:
     ```bash
     git clone https://github.com/HernandezDev/practica-boletin-c.git
@@ -34,7 +33,7 @@ Este proyecto es un programa en C para gestionar las notas de los alumnos en var
     ```bash
     ./boletin.exe
     ```
-#### Para Mejor Compatibilidad
+### Para Mejor Compatibilidad
 1. Clona el repositorio:
     ```bash
     git clone https://github.com/HernandezDev/practica-boletin-c.git
